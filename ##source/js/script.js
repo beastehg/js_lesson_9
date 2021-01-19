@@ -5,10 +5,20 @@ document.querySelector("body").appendChild(h2);
 
 let linkStartTimer = null;
 
+let fixTime = (time) => {
+	if (time.getMinutes() < 10 && time.getSeconds() < 10)
+		return "0" + time.getMinutes() + ":" + "0" + time.getSeconds();
+	else if (time.getMinutes() >= 10 && time.getSeconds() < 10)
+		return time.getMinutes() + ":" + "0" + time.getSeconds();
+	else if (time.getMinutes() <= 10 && time.getSeconds() >= 10)
+		return "0" + time.getMinutes() + ":" + time.getSeconds();
+	else return time.getMinutes() + ":" + time.getSeconds();
+};
+
 let timer = () => {
 	linkStartTimer = setInterval(() => {
 		time = new Date();
-		h2.innerHTML = `Время: ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+		h2.innerHTML = `Время: ${time.getHours()}:${fixTime(time)}`;
 	}, 1000);
 };
 
